@@ -1,0 +1,43 @@
+/* ============================================================
+   设计令牌 Design Tokens
+   暗色 · 高级 · 克制 · 科技感
+   主调：深炭黑 + 暖金点缀 + 冷银文字（避开俗气蓝紫科技色）
+   ============================================================ */
+
+:root {
+  /* —— 色彩 —— */
+  --bg: #0a0a0c;            /* 页面底色：近黑炭 */
+  --bg-elevated: #101013;  /* 卡片/浮层 */
+  --surface: #15151a;       /* 次级容器 */
+  --line: rgba(255, 255, 255, 0.08);   /* 分割线 / 边框 */
+  --line-strong: rgba(255, 255, 255, 0.16);
+
+  --text: #ececec;          /* 主文字：冷银白 */
+  --text-dim: #a8a8ae;      /* 次要文字 */
+  --text-muted: #6b6b72;    /* 弱化文字 / 标签 */
+  --text-faint: #444449;    /* 极弱 */
+
+  --accent: #c9a86a;        /* 暖金：克制强调色 */
+  --accent-soft: rgba(201, 168, 106, 0.14);
+  --accent-glow: rgba(201, 168, 106, 0.35);
+
+  /* —— 排版 —— */
+  --font-display: 'Space Grotesk', 'Noto Sans SC', system-ui, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* —— 节奏 —— */
+  --max-w: 1700px;          /* 版心 */
+  --gutter: clamp(24px, 4vw, 80px); /* 侧边距 */
+  --section-py: clamp(96px, 11vw, 160px); /* 模块上下间距 */
+
+  --radius: 2px;            /* 克制直角，少量圆角 */
+  --radius-card: 6px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.6s;
+}
+
+/* 字体家族工具类 */
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
