@@ -95,50 +95,50 @@
 
 /* —— Hero opening：.hero.is-ready 触发，首屏强视觉 —— */
 .hero .m-hero-bg,
-.hero .m-meta,
-.hero .m-tag,
-.hero .m-title,
-.hero .m-title .en,
-.hero .m-sub,
-.hero .m-scroll,
-.hero .m-role {
+.hero .m-brand,
+.hero .m-topnav,
+.hero .m-kw,
+.hero .m-seal,
+.hero .m-titleblock,
+.hero .m-metar,
+.hero .m-scroll {
   opacity: 0;
   will-change: opacity, transform, clip-path;
 }
-/* 无 JS 时降级：1s 后兜底显示，避免空白 */
+/* 圆形 R 徽标独立用 scale 进场 */
+.hero .m-seal { transform: scale(0.6); }
+
+/* 无 JS 时降级：4s 后兜底显示，避免空白 */
 .hero .m-hero-bg    { animation: m-fallback 0s 4s forwards; }
-.hero .m-meta,
-.hero .m-tag,
-.hero .m-title,
-.hero .m-title .en,
-.hero .m-sub,
-.hero .m-scroll,
-.hero .m-role { animation: m-fallback-fade 0s 4s forwards; }
+.hero .m-brand,
+.hero .m-topnav,
+.hero .m-kw,
+.hero .m-seal,
+.hero .m-titleblock,
+.hero .m-metar,
+.hero .m-scroll { animation: m-fallback-fade 0s 4s forwards; }
 
 .hero.is-ready .m-hero-bg {
   animation:
     m-hero-bg 1.5s var(--ease) 0.1s forwards,
     hero-bg-drift 24s var(--ease) 1.7s infinite alternate;
 }
-.hero.is-ready .m-meta {
-  animation: m-down-in 0.9s var(--ease) 0.25s forwards;
-}
-.hero.is-ready .m-tag {
-  animation: m-tag-in 0.85s var(--ease) 0.55s forwards;
-}
-.hero.is-ready .m-title {
-  animation: m-title-in 1.35s var(--ease) 0.65s forwards;
-}
-.hero.is-ready .m-title .en {
-  animation: m-up-in 0.95s var(--ease) 1.5s forwards;
-}
-.hero.is-ready .m-sub {
-  animation: m-up-in 1s var(--ease) 1.75s forwards;
-}
-.hero.is-ready .m-scroll,
-.hero.is-ready .m-role {
-  animation: m-up-in 0.95s var(--ease) 1.95s forwards;
-}
+/* 顶部双角：左上联名 + 右上迷你导航（从顶部下落） */
+.hero.is-ready .m-brand  { animation: m-down-in 0.95s var(--ease) 0.22s forwards; }
+.hero.is-ready .m-topnav { animation: m-down-in 0.95s var(--ease) 0.30s forwards; }
+/* 中部三列关键词：横向错落位移 + 收窄 letter-spacing */
+.hero.is-ready .m-kw { animation: m-kw-in 0.95s var(--ease) 0.5s forwards; }
+.hero.is-ready .hero__kw--freedom.m-kw { animation-delay: 0.45s; animation-name: m-kw-in-left; }
+.hero.is-ready .hero__kw--future.m-kw  { animation-delay: 0.55s; animation-name: m-kw-in; }
+.hero.is-ready .hero__kw--symbol.m-kw  { animation-delay: 0.65s; animation-name: m-kw-in-right; }
+/* 圆形 R 徽标：稍后 scale 弹出（有弹性但不过度） */
+.hero.is-ready .m-seal { animation: m-seal-in 1.1s var(--ease) 1.0s forwards; }
+/* 左下标题主视觉：主标压缩归位 + 遮罩揭开（最大视觉冲击） */
+.hero.is-ready .m-titleblock { animation: m-titleblock-in 1.35s var(--ease) 0.75s forwards; }
+/* 右下 EST + 条码：稍后升位 */
+.hero.is-ready .m-metar  { animation: m-up-in 1s var(--ease) 1.6s forwards; }
+/* 底部滚动提示：收尾进场 */
+.hero.is-ready .m-scroll { animation: m-up-in 0.95s var(--ease) 1.8s forwards; }
 
 @keyframes m-fallback { to { opacity: 1; } }
 @keyframes m-fallback-fade { to { opacity: 1; transform: none; } }
@@ -147,10 +147,31 @@
   0%   { opacity: 0; transform: scale(1.18); clip-path: inset(100% 0 0 0); }
   100% { opacity: 1; transform: scale(1); clip-path: inset(0); }
 }
-@keyframes m-title-in {
-  0%   { opacity: 0; transform: translateY(48%) scaleY(1.05); clip-path: inset(0 0 100% 0); }
+/* 标题主视觉：主压缩归位 + 遮罩揭开（PORTFOLIO 大字主冲击） */
+@keyframes m-titleblock-in {
+  0%   { opacity: 0; transform: translateY(42%) scaleY(1.06); clip-path: inset(0 0 100% 0); }
   55%  { opacity: 1; clip-path: inset(0); }
   100% { opacity: 1; transform: none; }
+}
+/* 中部三列关键词：左列从左进 / 中间上升 / 右列从右进，同步收窄字距
+   —— 注意中心列有 translateX(-50%)，动画中要保留该 base 偏移，只叠加位移 */
+@keyframes m-kw-in-left {
+  0%   { opacity: 0; transform: translateX(-22px); letter-spacing: 0.45em; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes m-kw-in {
+  0%   { opacity: 0; transform: translate(-50%, -10px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+@keyframes m-kw-in-right {
+  0%   { opacity: 0; transform: translateX(22px); letter-spacing: 0.45em; }
+  100% { opacity: 1; transform: none; }
+}
+/* 圆形 R 徽标：scale 弹出（柔和不过度） */
+@keyframes m-seal-in {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
 }
 @keyframes m-up-in {
   0%   { opacity: 0; transform: translateY(34px); }
@@ -171,13 +192,13 @@
 /* —— prefers-reduced-motion 降级：全部立即显示 —— */
 @media (prefers-reduced-motion: reduce) {
   .hero .m-hero-bg,
-  .hero .m-meta,
-  .hero .m-tag,
-  .hero .m-title,
-  .hero .m-title .en,
-  .hero .m-sub,
-  .hero .m-scroll,
-  .hero .m-role {
+  .hero .m-brand,
+  .hero .m-topnav,
+  .hero .m-kw,
+  .hero .m-seal,
+  .hero .m-titleblock,
+  .hero .m-metar,
+  .hero .m-scroll {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;

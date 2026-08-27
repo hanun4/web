@@ -20,8 +20,8 @@ export const WORKS = [
     category: 'pictures',
     categoryLabel: '产品渲染',
     year: '2025',
-    role: '建模 / 材质 / 渲染',
-    summary: '整车产品级视觉表现，车身漆面与环境反射精细把控，HDR 光照配合多通道分层合成，满足商业广告精度。',
+    role: '材质 / 渲染',
+    summary: '临摹作品，整车产品级视觉表现，车身漆面与环境反射精细把控。',
     cover: '/assets/works/01-benz-carviz.jpg',
     height: 608
   },
@@ -261,6 +261,20 @@ export const WORKS = [
     role: '导演 / 动态视觉',
     summary: 'AI 影视方向动态作品，B 站视频，可直接播放。',
     videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=575980207&bvid=BV1xz4y1577z&cid=1275808747&p=1',
+    height: 608
+  },
+  // —— 19 视频项（B 站 iframe 嵌入，16:9）
+  {
+    id: 'w19',
+    index: '19',
+    title: 'AI 影视 · 动态作品 III',
+    titleEn: 'AI Film · Motion Piece III',
+    category: 'videos',
+    categoryLabel: 'AI 影视',
+    year: '2025',
+    role: '导演 / 动态视觉',
+    summary: 'AI 影视方向动态作品，B 站视频，可直接播放。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=117162463200702&bvid=BV1dx8Z6vEqN&cid=41298036375&p=1',
     height: 608
   }
 ]

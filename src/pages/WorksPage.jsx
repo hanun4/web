@@ -13,6 +13,73 @@ const ZOOM_ICON = (
   </svg>
 )
 
+const PLAY_ICON = (
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <circle cx="14" cy="14" r="13.2" stroke="currentColor" strokeOpacity="0.85" strokeWidth="1.6" />
+    <path d="M11.2 9.8v8.4l7.2-4.2L11.2 9.8z" fill="currentColor" />
+  </svg>
+)
+
+/**
+ * 视频项：封面占位 → 单击才挂载 B 站 iframe，避免首屏加载 iframe
+ *  —— 无用户点击前不请求视频站资源；点击后立即显示 iframe（B 站 player 默认不自动播，需用户再点一次播放按钮，符合"单击后播放、不自动播"）
+ *  —— 若 works 数据有 cover 字段则用其作封面；否则用 B 站视频封面（通过 bvid 推导官方 cid 封面 API）
+ */
+function VideoCardCover({ work }) {
+  const [played, setPlayed] = useState(false)
+
+  // 尝试推导 B 站封面：bvid 通常唯一标识视频
+  const bvidMatch = /bvid=([^&]+)/i.exec(work.videoSrc || '')
+  const bvid = bvidMatch ? bvidMatch[1] : ''
+  const bilibiliCover = bvid ? `https://i0.hdslb.com/bfs/archive/blank_${bvid}.jpg` : ''
+  const cover = work.cover || bilibiliCover || ''
+
+  if (played) {
+    return (
+      <iframe
+        className="work-card__video"
+        src={work.videoSrc}
+        scrolling="no"
+        frameBorder="0"
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        allowFullScreen
+        title={work.title}
+      />
+    )
+  }
+
+  return (
+    <div
+      className="work-card__video work-card__video--cover"
+      onClick={(e) => { e.stopPropagation(); setPlayed(true); }}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); setPlayed(true); } }}
+      role="button"
+      tabIndex={0}
+      aria-label={`播放视频：${work.title}`}
+    >
+      {cover && (
+        <img
+          className="work-card__video-img"
+          src={cover}
+          alt={work.title}
+          loading="lazy"
+          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+        />
+      )}
+      <span className="work-card__video-overlay" aria-hidden="true" />
+      <span className="work-card__video-play" aria-hidden="true">
+        {PLAY_ICON}
+      </span>
+      <span className="work-card__video-tag">
+        <svg width="10" height="10" viewBox="0 0 14 14" fill="none" aria-hidden="true" style={{ display: 'inline-block', verticalAlign: -1, marginRight: 6 }}>
+          <path d="M6 4.5h3.5A.5.5 0 0 1 10 5v4a.5.5 0 0 1-.5.5H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        点击播放
+      </span>
+    </div>
+  )
+}
+
 /**
  * 作品集独立页 /works
  */
@@ -132,15 +199,7 @@ export default function WorksPage() {
                     >
                       <span className="work-card__index">{item.index}</span>
                       {isVideo ? (
-                        <iframe
-                          className="work-card__video"
-                          src={item.videoSrc}
-                          scrolling="no"
-                          frameBorder="0"
-                          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                          allowFullScreen
-                          title={item.title}
-                        />
+                        <VideoCardCover work={item} />
                       ) : (
                         <>
                           <span className="work-card__zoom" aria-hidden="true">{ZOOM_ICON}</span>
