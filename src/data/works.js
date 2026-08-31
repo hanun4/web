@@ -135,7 +135,7 @@ export const WORKS = [
     year: '2025',
     role: '美术 / 三维资产',
     summary: '练习作品。',
-    cover: '/assets/works/08-film-concept.png',
+    cover: '/assets/works/08-film-concept.jpg',
     height: 608
   },
   // —— 10 保时捷竖海报 · 产品渲染（3:4 竖幅）
