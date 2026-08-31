@@ -23,22 +23,32 @@ const PLAY_ICON = (
 /**
  * 视频项：封面占位 → 单击才挂载 B 站 iframe，避免首屏加载 iframe
  *  —— 无用户点击前不请求视频站资源；点击后立即显示 iframe（B 站 player 默认不自动播，需用户再点一次播放按钮，符合"单击后播放、不自动播"）
- *  —— 若 works 数据有 cover 字段则用其作封面；否则用 B 站视频封面（通过 bvid 推导官方 cid 封面 API）
+ *  —— 封面取数据文件的 cover 字段（B 站官方 API pic，真实地址无法从 bvid 推导）
  */
 function VideoCardCover({ work }) {
   const [played, setPlayed] = useState(false)
 
-  // 尝试推导 B 站封面：bvid 通常唯一标识视频
-  const bvidMatch = /bvid=([^&]+)/i.exec(work.videoSrc || '')
-  const bvid = bvidMatch ? bvidMatch[1] : ''
-  const bilibiliCover = bvid ? `https://i0.hdslb.com/bfs/archive/blank_${bvid}.jpg` : ''
-  const cover = work.cover || bilibiliCover || ''
+  const cover = work.cover || ''
+
+  // 给视频源追加 autoplay=1&muted=1（静音自动播），浏览器策略下父级点击不被视为 iframe 内手势，只能静音自动播
+  // —— 去重：如果已包含同名参数则不重复加
+  function addQueryParams(base, extras) {
+    if (!base) return base
+    const [path, qs = ''] = base.split('?')
+    const params = new URLSearchParams(qs)
+    Object.entries(extras).forEach(([k, v]) => {
+      if (!params.has(k)) params.set(k, v)
+    })
+    const q = params.toString()
+    return q ? `${path}?${q}` : path
+  }
+  const playingSrc = addQueryParams(work.videoSrc || '', { autoplay: '1', muted: '1' })
 
   if (played) {
     return (
       <iframe
         className="work-card__video"
-        src={work.videoSrc}
+        src={playingSrc}
         scrolling="no"
         frameBorder="0"
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
@@ -63,7 +73,8 @@ function VideoCardCover({ work }) {
           src={cover}
           alt={work.title}
           loading="lazy"
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          referrerPolicy="no-referrer"
+          onError={(e) => { e.currentTarget.style.display = 'none'; console.warn('[video cover] 加载失败：', cover) }}
         />
       )}
       <span className="work-card__video-overlay" aria-hidden="true" />
@@ -204,17 +215,33 @@ export default function WorksPage() {
                         <>
                           <span className="work-card__zoom" aria-hidden="true">{ZOOM_ICON}</span>
                           <img className="work-card__img" src={item.cover} alt={item.title} loading="lazy" />
-                          <div className="work-card__overlay">
-                            <span className="work-card__cat">{item.categoryLabel} · {item.year}</span>
-                            <h3 className="work-card__title">{item.title}</h3>
-                            <p className="work-card__summary">{item.summary}</p>
-                            <div className="work-card__meta">
-                              <span>{item.role}</span>
-                              <span className="sep">/</span>
-                              <span>{item.titleEn}</span>
-                            </div>
-                          </div>
                         </>
+                      )}
+                      {/* 视频项：仅保留分类+角色 meta，去掉标题和简介 */}
+                      {!isVideo && (
+                        <div className="work-card__overlay">
+                          <span className="work-card__cat">{item.categoryLabel} · {item.year}</span>
+                          <h3 className="work-card__title">{item.title}</h3>
+                          <p className="work-card__summary">{item.summary}</p>
+                          <div className="work-card__meta">
+                            <span>{item.role}</span>
+                            <span className="sep">/</span>
+                            <span>{item.titleEn}</span>
+                          </div>
+                        </div>
+                      )}
+                      {isVideo && (
+                        <div className="work-card__overlay">
+                          <span className="work-card__cat">
+                            {item.categoryLabel} · {item.year}
+                            <span className="video-pill">VIDEO</span>
+                          </span>
+                          <div className="work-card__meta">
+                            <span>{item.role}</span>
+                            <span className="sep">/</span>
+                            <span>{item.titleEn}</span>
+                          </div>
+                        </div>
                       )}
                       <span className="work-card__corner" aria-hidden="true">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

@@ -295,11 +295,12 @@
           background-clip: text;
 }
 
-/* —— 右下：EST + 日期 + 条码 —— */
+/* —— 右上：EST + 日期 + 条码（与迷你导航同高，避免与 PORTFOLIO 大字重叠） —— */
 .hero__meta-r {
   position: absolute;
   right: var(--gutter);
-  bottom: clamp(96px, 12vw, 180px);
+  top: clamp(24px, 3.2vw, 48px);
+  margin-top: 40px;
   text-align: right;
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -373,6 +374,7 @@
 /* —— 移动端压缩（768px 以下）—— */
 @media (max-width: 768px) {
   .hero__topnav { display: none; }
+  .hero__meta-r { top: 70px; margin-top: 0; }
   .hero__kw { top: 26vh; font-size: 10px; }
   .hero__kw--freedom { left: var(--gutter); }
   .hero__kw--future  { display: none; }
@@ -382,7 +384,6 @@
   .hero__title-cn { padding-bottom: 0; }
   .zh-line-1 { letter-spacing: 0.28em; }
   .hero__title-en { font-size: clamp(60px, 20vw, 120px); }
-  .hero__meta-r { display: none; }
 }
 
 /* Hero 背景装饰光晕 */
@@ -508,6 +509,13 @@
   user-select: none;
   outline: none;
   overflow: hidden;
+  z-index: 2;
+}
+/* 视频卡：上方 overlay / corner / index 不能拦截点击，点击需穿透到封面层 */
+.work-card--video .work-card__overlay,
+.work-card--video .work-card__corner,
+.work-card--video > .work-card__index {
+  pointer-events: none !important;
 }
 .work-card__video-img {
   position: absolute;
@@ -1194,8 +1202,8 @@
 }
 .lb__btn:hover {
   color: var(--text);
-  background: rgba(201, 168, 106, 0.08);
-  border-color: rgba(201, 168, 106, 0.5);
+  background: rgba(106, 190, 201, 0.08);
+  border-color: rgba(106, 201, 196, 0.5);
   transform: translateY(-1px);
 }
 .lb__btn--close { top: 20px; right: 22px; }
@@ -1238,6 +1246,6 @@
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), background 0.3s var(--ease);
   pointer-events: none;
 }
-.work-card:hover .work-card__zoom { background: rgba(201, 168, 106, 0.85); border-color: transparent; color: #0a0a0c; }
+.work-card:hover .work-card__zoom { background: rgba(106, 201, 196, 0.85); border-color: transparent; color: #0a0a0c; }
 
 

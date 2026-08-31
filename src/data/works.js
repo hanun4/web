@@ -7,7 +7,8 @@
 export const CATEGORIES = [
   { key: 'all',       label: '全部' },
   { key: 'videos',      label: '视频' },
-  { key: 'pictures',       label: '单帧' }
+  { key: 'pictures',       label: '单帧' },
+  { key: 'tech',        label: '技术' }
 ]
 
 export const WORKS = [
@@ -35,7 +36,7 @@ export const WORKS = [
     categoryLabel: '产品渲染',
     year: '2025',
     role: '渲染 / 合成',
-    summary: '面向市场宣发的外饰视觉，6K 级渲染分辨率，重点呈现车身金属质感与光影节奏。',
+    summary: '重点呈现底盘金属质感与光影节奏。',
     cover: '/assets/works/02-baojun-carviz.jpg',
     height: 608
   },
@@ -49,7 +50,7 @@ export const WORKS = [
     categoryLabel: '产品渲染',
     year: '2024',
     role: '灯光 / 渲染',
-    summary: '未来感外饰场景，极简环境衬托车身曲线，冷银基调下的克制反射与高光。',
+    summary: '临摹作品，整车产品级视觉表现，车身漆面与环境反射精细把控。',
     cover: '/assets/works/07-tesla-carviz.jpg',
     height: 608
   },
@@ -85,27 +86,27 @@ export const WORKS = [
   {
     id: 'w06',
     index: '06',
-    title: '发动机 · 技术视觉',
-    titleEn: 'Engine · Technical Illustration',
+    title: '华为手机',
+    titleEn: 'HuaWei · Phone',
     category: 'pictures',
-    categoryLabel: '产品渲染',
+    categoryLabel: '渲染',
     year: '2023',
-    role: '建模 / 渲染',
-    summary: '动力总成技术插图，配合剖面与透明图层表现内部结构，用于宣传物料与培训。',
-    cover: '/assets/works/09-engine-render.jpg',
+    role: '渲染',
+    summary: '华为手机物料。',
+    cover: '/assets/works/09-huawei-Phone.jpg',
     height: 810
   },
   // —— 07 三维角色（竖 3:4）
   {
     id: 'w07',
     index: '07',
-    title: '写实数字人肖像',
-    titleEn: 'Photoreal Digital Human Portrait',
+    title: '电池',
+    titleEn: 'Battery',
     category: 'pictures',
-    categoryLabel: '三维角色',
+    categoryLabel: '渲染',
     year: '2025',
     role: '雕刻 / 贴图 / 毛发',
-    summary: '写实数字人角色肖像作品，从扫描数据到 ZBrush 雕刻、皮肤材质、毛发系统全流程。',
+    summary: '电池物料。',
     cover: '/assets/works/05-character-portrait.jpg',
     height: 1440
   },
@@ -113,13 +114,13 @@ export const WORKS = [
   {
     id: 'w08',
     index: '08',
-    title: '概念场景 · 空间视觉',
-    titleEn: 'Concept Scene · Spatial Vision',
+    title: '保时捷 · 整车视觉',
+    titleEn: 'Porsche · Car Visualization',
     category: 'pictures',
-    categoryLabel: '场景概念',
+    categoryLabel: '产品渲染',
     year: '2025',
     role: '场景 / 灯光',
-    summary: '影视前置美术阶段的概念场景，用大尺寸渲染输出氛围稿，为后续镜头与资产制作定调。',
+    summary: '练习作品。',
     cover: '/assets/works/06-scene-concept.jpg',
     height: 608
   },
@@ -127,13 +128,13 @@ export const WORKS = [
   {
     id: 'w09',
     index: '09',
-    title: 'AI 影视 · 概念帧',
-    titleEn: 'AI Film · Concept Frames',
+    title: '整车视觉',
+    titleEn: 'Car Visualization',
     category: 'pictures',
-    categoryLabel: 'AI 影视',
+    categoryLabel: '产品渲染',
     year: '2025',
     role: '美术 / 三维资产',
-    summary: '以 AI 概念生成打底、三维资产为结构支撑的影视概念帧，用三维保证镜头与透视的可信度。',
+    summary: '练习作品。',
     cover: '/assets/works/08-film-concept.png',
     height: 608
   },
@@ -141,13 +142,13 @@ export const WORKS = [
   {
     id: 'w10',
     index: '10',
-    title: '保时捷 · 竖幅宣传海报',
+    title: '银联 · RUARUA',
     titleEn: 'Porsche · Vertical Poster 01',
     category: 'pictures',
     categoryLabel: '产品渲染',
     year: '2024',
     role: '渲染 / 排版',
-    summary: '为车厂社交媒体定制的竖幅宣传品，突出车身线条与环境的戏剧化对比。',
+    summary: '为银联制作的竖屏海报。',
     cover: '/assets/works/10-porsche-poster-01.jpg',
     height: 1440
   },
@@ -155,13 +156,13 @@ export const WORKS = [
   {
     id: 'w11',
     index: '11',
-    title: '保时捷 · 尾灯视角海报',
-    titleEn: 'Porsche · Rear Vertical Poster',
+    title: '奔驰',
+    titleEn: 'Mercedes-Benz · Rear Vertical Poster',
     category: 'pictures',
     categoryLabel: '产品渲染',
     year: '2024',
     role: '灯光 / 合成',
-    summary: '以车尾视角切入的竖幅表达，尾灯与环境反射的细节是画面重点。',
+    summary: '练习作品。',
     cover: '/assets/works/11-porsche-poster-02.jpg',
     height: 1440
   },
@@ -169,13 +170,13 @@ export const WORKS = [
   {
     id: 'w12',
     index: '12',
-    title: 'AI 影视 · 竖屏概念帧',
+    title: '领克 · 竖屏概念帧',
     titleEn: 'AI Film · Vertical Concept Frame',
     category: 'pictures',
-    categoryLabel: 'AI 影视',
+    categoryLabel: '渲染',
     year: '2025',
     role: '美术 / 三维资产',
-    summary: '适配移动端播放的竖屏概念镜头，以人像构图强调情绪与叙事张力。',
+    summary: '为领克制作的物料。',
     cover: '/assets/works/12-vertical-frame.jpg',
     height: 1700
   },
@@ -183,13 +184,13 @@ export const WORKS = [
   {
     id: 'w13',
     index: '13',
-    title: '数字人 · 竖幅肖像',
+    title: '银联 · RUARUA',
     titleEn: 'Digital Human · Vertical Portrait',
     category: 'pictures',
-    categoryLabel: '三维角色',
+    categoryLabel: '渲染',
     year: '2025',
     role: '雕刻 / 皮肤 / 毛发',
-    summary: '竖幅构图的数字人肖像作品，突出表情、眼神与皮肤质感的微细节。',
+    summary: '为银联制作的竖屏海报。',
     cover: '/assets/works/13-portrait-shot.jpg',
     height: 1440
   },
@@ -197,13 +198,13 @@ export const WORKS = [
   {
     id: 'w14',
     index: '14',
-    title: '场景概念 · 方幅构图',
+    title: '宝骏',
     titleEn: 'Concept Scene · Square Composition',
     category: 'pictures',
-    categoryLabel: '场景概念',
+    categoryLabel: '渲染',
     year: '2024',
     role: '场景 / 灯光',
-    summary: '方幅构图的概念场景，强调设计元素平衡与色块节奏，适合用作宣发主视觉。',
+    summary: '宝骏练习作品。',
     cover: '/assets/works/14-square-concept-01.jpg',
     height: 1080
   },
@@ -211,13 +212,13 @@ export const WORKS = [
   {
     id: 'w15',
     index: '15',
-    title: '视觉特效 · 粒子概念图',
+    title: '整车',
     titleEn: 'VFX · Particle Concept',
     category: 'pictures',
-    categoryLabel: '视觉特效',
+    categoryLabel: '渲染',
     year: '2025',
     role: 'Houdini / 合成',
-    summary: '以粒子特效为主体的视觉实验，配合三维场景做前后期合成的预演稿。',
+    summary: '练习作品。',
     cover: '/assets/works/15-square-concept-02.jpg',
     height: 1080
   },
@@ -225,13 +226,13 @@ export const WORKS = [
   {
     id: 'w16',
     index: '16',
-    title: '数字人 · 方幅半身像',
+    title: '五菱底盘渲染',
     titleEn: 'Digital Human · Half Body Portrait',
     category: 'pictures',
-    categoryLabel: '三维角色',
+    categoryLabel: '渲染',
     year: '2024',
     role: '贴图 / 灯光 / 渲染',
-    summary: '中近景半身像，服装材质搭配人像打光，用于项目前期的角色风格测试。',
+    summary: '为五菱渲染的物料。',
     cover: '/assets/works/16-character-square.jpg',
     height: 1080
   },
@@ -239,14 +240,15 @@ export const WORKS = [
   {
     id: 'w17',
     index: '17',
-    title: 'AI 影视 · 动态作品',
-    titleEn: 'AI Film · Motion Piece',
+    title: '动态作品',
+    titleEn: 'Motion Piece',
     category: 'videos',
-    categoryLabel: 'AI 影视',
+    categoryLabel: '动态',
     year: '2025',
     role: '导演 / 动态视觉',
     summary: 'AI 影视方向动态作品，B 站视频，可直接播放。',
     videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=117162446424713&bvid=BV1Rt8Z6PEzQ&cid=41297841770&p=1',
+    cover: 'https://i2.hdslb.com/bfs/archive/2412c015346d3716fb8723394dfe9a2cb138ccf6.jpg',
     height: 608
   },
   // —— 18 视频项（B 站 iframe 嵌入，16:9）
@@ -261,6 +263,7 @@ export const WORKS = [
     role: '导演 / 动态视觉',
     summary: 'AI 影视方向动态作品，B 站视频，可直接播放。',
     videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=575980207&bvid=BV1xz4y1577z&cid=1275808747&p=1',
+    cover: 'https://i0.hdslb.com/bfs/archive/6aaba8496c069d6db210c4b607b5e82bb2a2f929.jpg',
     height: 608
   },
   // —— 19 视频项（B 站 iframe 嵌入，16:9）
@@ -275,6 +278,82 @@ export const WORKS = [
     role: '导演 / 动态视觉',
     summary: 'AI 影视方向动态作品，B 站视频，可直接播放。',
     videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=117162463200702&bvid=BV1dx8Z6vEqN&cid=41298036375&p=1',
+    cover: 'https://i2.hdslb.com/bfs/archive/ba67ac801994eeaf7d4369faf27714a810c56385.jpg',
+    height: 608
+  },
+  // —— 20 视频项（B 站 iframe 嵌入，16:9）
+  {
+    id: 'w20',
+    index: '20',
+    title: '咖啡豆 · Houdini 制作',
+    titleEn: 'Coffee Bean · Houdini Practice',
+    category: 'videos',
+    categoryLabel: 'AI 影视',
+    year: '2021',
+    role: 'Houdini / Arnold 渲染',
+    summary: 'Houdini 制作，Arnold 渲染。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=716950239&bvid=BV1CX4y1c7bG&cid=377878449&p=1',
+    cover: 'https://i2.hdslb.com/bfs/archive/c2516250b7058879c390973fe685d5a73a8a6bbe.jpg',
+    height: 608
+  },
+  // —— 21 视频项（B 站 iframe 嵌入，16:9）
+  {
+    id: 'w21',
+    index: '21',
+    title: '雨中保时捷 911 · Houdini 制作',
+    titleEn: 'Porsche 911 in the Rain · Houdini',
+    category: 'videos',
+    categoryLabel: 'AI 影视',
+    year: '2021',
+    role: 'Houdini / 动态视觉',
+    summary: '雨中保时捷，模仿的一个视频，Houdini 制作。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=289343211&bvid=BV15f4y1671Z&cid=303914701&p=1',
+    cover: 'https://i1.hdslb.com/bfs/archive/28cebc963d2b56617e7f2809c2431a65e639f796.jpg',
+    height: 608
+  },
+  // —— 22 技术项（B 站技术演示视频，BV1CV411B73L）
+  {
+    id: 'w22',
+    index: '22',
+    title: '技术演示 · 流程解析',
+    titleEn: 'Tech Demo · Process Breakdown',
+    category: 'tech',
+    categoryLabel: '技术演示',
+    year: '2023',
+    role: '技术美术 / TD',
+    summary: '三维制作流程解析演示，B 站技术演示视频。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=413956566&bvid=BV1CV411B73L&cid=215871737&p=1',
+    cover: 'https://i1.hdslb.com/bfs/archive/feed9ec8e2ef40c2ae04f2c44a4f3b52e42ea541.jpg',
+    height: 608
+  },
+  // —— 23 技术项（B 站技术演示视频，BV1cf4y1R7Zr，表情控制插件）
+  {
+    id: 'w23',
+    index: '23',
+    title: '表情控制插件 · Maya 自制控制器',
+    titleEn: 'Facial Rig Plugin · Maya Custom Controller',
+    category: 'tech',
+    categoryLabel: '技术演示',
+    year: '2020',
+    role: 'Maya / 插件开发',
+    summary: '自制面部控制器，可配合捏脸系统。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=286268655&bvid=BV1cf4y1R7Zr&cid=210603016&p=1',
+    cover: 'https://i0.hdslb.com/bfs/archive/c96cc438c03b12c87ad5b8096ab406c7f92af67d.jpg',
+    height: 608
+  },
+  // —— 24 技术项（B 站技术演示视频，BV1GK411J7yn，maya捏脸插件）
+  {
+    id: 'w24',
+    index: '24',
+    title: 'Maya 捏脸插件 · MEL 工具',
+    titleEn: 'Maya Face-Shaping Plugin · MEL Tool',
+    category: 'tech',
+    categoryLabel: '技术演示',
+    year: '2020',
+    role: 'Maya / 插件开发',
+    summary: 'Maya MEL 自制捏脸插件。',
+    videoSrc: 'https://player.bilibili.com/player.html?isOutside=true&aid=498864897&bvid=BV1GK411J7yn&cid=210628251&p=1',
+    cover: 'https://i2.hdslb.com/bfs/archive/90ccb8eabef9d6bfcf572055847a882970cf4e1a.jpg',
     height: 608
   }
 ]

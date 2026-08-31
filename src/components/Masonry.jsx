@@ -12,41 +12,59 @@ import './Masonry.css'
  */
 function Masonry({ data, renderItem }) {
   const [columns, setColumns] = useState(3)
+  const ref = useRef(null)
+  const [width, setWidth] = useState(0)
+  // 缓存每张图片的真实宽高比（naturalWidth/naturalHeight）
+  // —— key: item.id, value: aspect ratio (w/h)，未加载前用 height 字段推导兼底
+  const aspectsRef = useRef({})
+  const [, force] = useState(0)
 
+  // 响应式列数
   useEffect(() => {
     const updateColumns = () => {
-      if (window.matchMedia('(min-width: 1200px)').matches) {
-        setColumns(3)
-      } else if (window.matchMedia('(min-width: 640px)').matches) {
-        setColumns(2)
-      } else {
-        setColumns(1)
-      }
+      if (window.matchMedia('(min-width: 1200px)').matches) setColumns(3)
+      else if (window.matchMedia('(min-width: 640px)').matches) setColumns(2)
+      else setColumns(1)
     }
     updateColumns()
     window.addEventListener('resize', updateColumns)
     return () => window.removeEventListener('resize', updateColumns)
   }, [])
 
-  const ref = useRef(null)
-  const [width, setWidth] = useState(0)
-
+  // 监听容器宽度
   useEffect(() => {
-    const handleResize = () => {
-      if (ref.current) setWidth(ref.current.offsetWidth)
-    }
+    const handleResize = () => { if (ref.current) setWidth(ref.current.offsetWidth) }
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [ref])
 
+  // 预加载每张图片拿真实宽高比，加载完缓存并重渲染
+  useEffect(() => {
+    data.forEach((item) => {
+      if (aspectsRef.current[item.id] || !item.cover) return
+      const img = new Image()
+      img.onload = () => {
+        if (img.naturalWidth && img.naturalHeight) {
+          aspectsRef.current[item.id] = img.naturalWidth / img.naturalHeight
+          force((x) => x + 1)
+        }
+      }
+      img.src = item.cover
+    })
+  }, [data])
+
   const [heights, gridItems] = useMemo(() => {
+    const cellWidth = width / columns
     const h = new Array(columns).fill(0)
     const items = data.map((child) => {
+      // 优先用真实宽高比；未加载时用 height 字段兼底（height字段原本是 2× cellHeight，这里反推）
+      const aspect = aspectsRef.current[child.id] || (child.height ? 1 / (child.height / 2 / cellWidth) : 0.66)
+      const cellHeight = cellWidth / aspect
       const column = h.indexOf(Math.min(...h))
-      const x = (width / columns) * column
-      const y = (h[column] += child.height / 2) - child.height / 2
-      return { ...child, x, y, width: width / columns, height: child.height / 2 }
+      const x = cellWidth * column
+      const y = (h[column] += cellHeight) - cellHeight
+      return { ...child, x, y, width: cellWidth, height: cellHeight }
     })
     return [h, items]
   }, [columns, data, width])
